@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>종로M ENGLISH · READING WORKBOOK</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><img src="/jongrom-logo.png" alt="종로M 로고"><div><strong>JONG-RO M ENGLISH</strong><span>READING WORKBOOK STUDIO</span></div></div>
+    <span id="ai" class="pill">AI 연결 확인 중</span>
+  </header>
+  <main class="wrap">
+    <section id="workbook" class="panel active">
+      <div class="hero"><span class="eyebrow">JONG-RO M ENGLISH</span><h1>지문 하나로 워크북 완성</h1><p>READING · STEP 1–5 · 학생용 · 교사용</p></div>
+      <div class="grid">
+        <div class="card span2"><h2>워크북 설정</h2><label>제목<input id="wbTitle" value="English Reading Workbook" maxlength="150"></label><p class="hint">영어 지문을 넣고 생성하세요. 문단 분석을 먼저 보여주고, READING 그림은 이어서 자동으로 채워집니다.</p></div>
+        <div class="card span2 signatureCard"><div><h2>종로M 시그니처 캐릭터</h2><p class="hint">첨부 워크북의 동그란 안경을 쓴 안내자와 단발머리 안내자를 모든 지문의 가로 3컷 만화에 같은 외형으로 등장시키도록 합니다. 지문에 맞춰 배경과 행동만 달라집니다.</p></div><img src="/signature-characters.jpg" alt="동그란 안경을 쓴 안내자와 단발머리 안내자의 가로 3컷 참고 그림"></div>
+        <div class="card"><h2>영어 본문</h2><p class="hint">문단 사이는 빈 줄로 나누고, 소제목은 <b># 소제목</b>으로 시작하세요. 문장마다 줄을 바꿀 필요는 없습니다.</p><label>파일 불러오기<input type="file" accept=".pdf,.docx,.txt,.md" onchange="extractWorkbookFile(this,'wbEnglish')"></label><textarea id="wbEnglish" class="wbInput" placeholder="# Introduction&#10;During World War II, a group of experts protected works of art. They became known as the Monuments Men.&#10;&#10;Their search for stolen treasures then began..."></textarea></div>
+        <div class="card"><h2>우리말 해석 <small>선택</small></h2><p class="hint">가지고 있는 해석을 같은 문단·문장 순서로 넣으세요. 비워 두면 AI가 작성합니다.</p><label>파일 불러오기<input type="file" accept=".pdf,.docx,.txt,.md" onchange="extractWorkbookFile(this,'wbKorean')"></label><textarea id="wbKorean" class="wbInput" placeholder="제2차 세계대전 동안 한 무리의 전문가들이 예술 작품을 보호했다. ..."></textarea></div>
+        <div class="card span2 actionCard"><div><strong>모든 문장 활용</strong><span>READING은 페이지마다 2~3문장, 가로 3컷 만화와 문단별 주제·제목 칸으로 제작합니다.</span></div><button id="wbStart" onclick="startWorkbook()">워크북 생성</button></div>
+        <div class="card span2 hidden" id="wbProgressCard"><h2 id="wbProgressTitle">생성 중</h2><div class="wbProgressTrack"><div id="wbProgressFill"></div></div><p id="wbProgressText" class="wbProgressText"></p><button id="wbRetry" class="secondary hidden" onclick="retryWorkbookImages()">누락된 삽화 다시 만들기</button></div>
+      </div>
+    </section>
+
+    <section id="output" class="output hidden">
+      <div class="outputBar"><div><strong>생성 결과</strong><span id="outputMeta"></span></div><div id="workbookPrint"><button class="secondary" onclick="printWorkbook('student')">학생용 PDF 저장</button><button class="secondary" onclick="printWorkbook('teacher')">교사용 PDF 저장</button><button id="wbRetryOutput" class="secondary hidden" onclick="retryWorkbookImages()">삽화 재시도</button><button class="secondary" onclick="downloadWorkbookDraft()">초안 JSON</button><button onclick="closeWorkbookOutput()">편집으로 돌아가기</button></div></div>
+      <div id="paper"></div>
+    </section>
+  </main>
+  <script src="/workbook.js"></script>
+</body>
+</html>
